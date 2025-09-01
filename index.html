@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nockitout — Starter Site + Client Intake Form (Local Demo)</title>
+  <style>
+    :root{
+      --bg: #0b1020;
+      --card:#121931;
+      --ink:#e8ecf7;
+      --muted:#aab4cf;
+      --brand:#7c5cff;
+      --brand-2:#34d399;
+      --danger:#ef4444;
+      --ok:#22c55e;
+      --warning:#fbbf24;
+      --radius-lg: 16px;
+      --radius-sm: 10px;
+      --shadow: 0 10px 30px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.05);
+      --shadow-soft: 0 6px 18px rgba(0,0,0,.25);
+      --grid: clamp(12px, 1.6vw, 20px);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;height:100%;background:radial-gradient(1200px 800px at 80% -10%,rgba(124,92,255,.18),transparent 60%),radial-gradient(1000px 900px at -10% 20%,rgba(52,211,153,.12),transparent 60%),var(--bg);color:var(--ink);font: 16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial}
+    a{color:var(--brand)}
+    .wrap{max-width:1100px;margin:0 auto;padding:calc(var(--grid)*2) var(--grid)}
+    header{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:clamp(14px,2vw,24px);position:sticky;top:0;background:linear-gradient(180deg,rgba(11,16,32,.95),rgba(11,16,32,.65));backdrop-filter: blur(6px);border-bottom:1px solid rgba(255,255,255,.06);z-index:50}
+    .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink)}
+    .logo{width:40px;height:40px;border-radius:12px;background:conic-gradient(from 210deg, var(--brand), var(--brand-2));box-shadow:var(--shadow-soft)}
+    nav a{margin-left:18px;text-decoration:none;color:var(--muted)}
+    nav a:hover{color:var(--ink)}
+    .btn{appearance:none;border:0;padding:12px 16px;border-radius:12px;background:var(--brand);color:#fff;font-weight:700;box-shadow:var(--shadow);cursor:pointer}
+    .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,.2)}
+    .btn.icon{display:inline-flex;align-items:center;gap:10px}
+
+    .hero{display:grid;grid-template-columns: 1.1fr .9fr;gap: clamp(18px,3vw,34px);align-items:center;margin-top:30px}
+    .hero h1{font-size: clamp(28px, 4.2vw, 48px);line-height:1.05;margin:0 0 10px}
+    .hero p{color:var(--muted);margin:0 0 20px}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08);border-radius:var(--radius-lg);box-shadow:var(--shadow);}
+    .panel{padding: clamp(16px,2vw,24px)}
+
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap: clamp(12px,2vw,20px);margin-top:24px}
+    .feature{padding:18px;border-radius:var(--radius-sm);border:1px dashed rgba(255,255,255,.1)}
+
+    form{display:grid;gap:14px}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    label{display:block;font-weight:600;margin-bottom:6px}
+    .req{color:var(--warning);font-weight:700}
+    input,textarea{width:100%;padding:12px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:var(--ink)}
+    input::placeholder, textarea::placeholder{color:#99a3bd}
+    textarea{min-height:120px}
+    .help{color:var(--muted);font-size:.9rem}
+    .form-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+    .tag{display:inline-flex;gap:10px;align-items:center;padding:6px 10px;border:1px solid rgba(255,255,255,.12);border-radius:999px;color:var(--muted)}
+
+    .success{background: #0f1f17;border-color: rgba(34,197,94,.4)}
+    .danger{background:#231417;border-color: rgba(239,68,68,.4)}
+
+    table{width:100%;border-collapse:collapse}
+    th,td{padding:10px;border-bottom:1px solid rgba(255,255,255,.08);text-align:left}
+    th{color:var(--muted);font-weight:600}
+
+    footer{color:var(--muted);text-align:center;padding:40px 0}
+
+    @media (max-width: 940px){
+      .hero{grid-template-columns:1fr}
+      .row{grid-template-columns:1fr}
+      nav{display:none}
+    }
+  </style>
+</head>
+<body>
+  <header class="wrap">
+    <a class="brand" href="#top">
+      <div class="logo"></div>
+      <div>
+        <strong style="display:block;font-size:18px">Nockitout</strong>
+        <small style="color:var(--muted)">Leads • Automations • Growth</small>
+      </div>
+    </a>
+    <nav>
+      <a href="#services">Services</a>
+      <a href="#intake">Client Intake</a>
+    </nav>
+    <button class="btn icon" onclick="document.getElementById('intake').scrollIntoView({behavior:'smooth'})">Start a Project ➜</button>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div>
+        <h1>Launch-ready starter site + <span style="background: linear-gradient(90deg,var(--brand),var(--brand-2));-webkit-background-clip:text;background-clip:text;color:transparent">client intake form</span></h1>
+        <p>Local-only demo. Submissions save to your browser and export to CSV or prefill an email to <a href="mailto:nockitout412@gmail.com">nockitout412@gmail.com</a>.</p>
+      </div>
+    </section>
+
+    <section id="intake" class="card panel" style="margin-top:28px">
+      <h2>Questionnaire about your business</h2>
+      <form id="intakeForm" novalidate>
+        <div>
+          <label for="size">Size of your business <span class="req">*</span></label>
+          <input id="size" name="size" placeholder="Number of employees, team size, etc." required />
+        </div>
+
+        <div>
+          <label for="years">Years in operation <span class="req">*</span></label>
+          <input id="years" name="years" placeholder="How long you've been in business" required />
+        </div>
+
+        <div>
+          <label for="specialties">Specialties?</label>
+          <input id="specialties" name="specialties" placeholder="Your company's key specialties" />
+        </div>
+
+        <div>
+          <label for="territory">Territory <span class="req">*</span></label>
+          <input id="territory" name="territory" placeholder="Service area or territory" required />
+        </div>
+
+        <div>
+          <label for="leadinsights">Lead Insights <span class="req">*</span></label>
+          <textarea id="leadinsights" name="leadinsights" placeholder="What are some common traits that separate good from bad leads in your industry?" required></textarea>
+        </div>
+
+        <div>
+          <label for="marketing">Marketing</label>
+          <textarea id="marketing" name="marketing" placeholder="What marketing are you doing currently?"></textarea>
+        </div>
+
+        <div>
+          <label for="goals">Goals <span class="req">*</span></label>
+          <textarea id="goals" name="goals" placeholder="What goals do you have for the future of your business?" required></textarea>
+        </div>
+
+        <div class="form-actions">
+          <button class="btn icon" type="submit">Submit Intake</button>
+          <button class="btn secondary" type="button" onclick="downloadCSV()">Download CSV</button>
+          <button class="btn secondary" type="button" onclick="prefillEmail()">Open Email Draft</button>
+          <span class="tag" id="formStatus" aria-live="polite"></span>
+        </div>
+      </form>
+    </section>
+
+    <section id="services" class="card panel" style="margin-top:18px">
+      <h3>Services snapshot</h3>
+      <div class="grid-3">
+        <div class="feature"><b>Automated Lead Sorting</b><div class="help">We score leads instantly so the best get priority and the worst don't waste time.</div></div>
+        <div class="feature"><b>Daily Email Updates</b><div class="help">A ranked digest of new & hot leads in your inbox every morning.</div></div>
+        <div class="feature"><b>Customizable Experience</b><div class="help">Your input matters and will directly impact how we score leads</div></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    <div class="card panel" style="text-align:center">
+      <div>© <span id="year"></span> Nockitout — Pittsburgh, PA • <a href="mailto:nockitout412@gmail.com">nockitout412@gmail.com</a></div>
+      <div class="help">This is a local demo. No data leaves your device.</div>
+    </div>
+  </footer>
+
+  <script>
+    // Minimal JS to save locally + export CSV + email summary
+    const BRAND_NAME = 'Nockitout';
+    const BRAND_EMAIL = 'nockitout412@gmail.com';
+
+    const el = (id)=>document.getElementById(id);
+    const fmtDate = (d)=> new Date(d).toLocaleString();
+
+    function toast(msg,type=''){
+      const chip=el('formStatus');
+      chip.textContent=msg; chip.className='tag '+(type||'');
+      if(msg) setTimeout(()=>{chip.textContent=''; chip.className='tag';}, 4500);
+    }
+
+    function getSubmissions(){
+      try{ return JSON.parse(localStorage.getItem('nockitout_subs')||'[]'); }catch{ return []; }
+    }
+    function setSubmissions(arr){ localStorage.setItem('nockitout_subs', JSON.stringify(arr)); }
+
+    function serializeForm(){
+      const f = el('intakeForm');
+      return {
+        date: Date.now(),
+        size: f.size.value.trim(),
+        years: f.years.value.trim(),
+        specialties: f.specialties.value.trim(),
+        territory: f.territory.value.trim(),
+        leadinsights: f.leadinsights.value.trim(),
+        marketing: f.marketing.value.trim(),
+        goals: f.goals.value.trim(),
+      };
+    }
+
+    function validate(d){
+      const e=[];
+      if(!d.size) e.push('Size is required');
+      if(!d.years && d.years !== 0) e.push('Years is required');
+      if(!d.territory) e.push('Territory is required');
+      if(!d.leadinsights) e.push('Lead Insights is required');
+      if(!d.goals) e.push('Goals is required');
+      return e;
+    }
+
+    function onSubmit(e){
+      e.preventDefault();
+      const data = serializeForm();
+      const errs = validate(data);
+      if(errs.length){ toast(errs[0],'danger'); return; }
+      const subs = getSubmissions();
+      subs.unshift(data);
+      setSubmissions(subs);
+      toast('Saved locally. Use Download CSV or Open Email Draft.', 'success');
+      e.target.reset();
+    }
+
+    function toCSV(rows){
+      const headers = Object.keys(rows[0]);
+      const esc = (v)=>`"${String(v??'').replace(/"/g,'""')}"`;
+      const body = rows.map(r=>headers.map(h=>esc(r[h])).join(',')).join('\n');
+      return headers.join(',') + '\n' + body;
+    }
+
+    function downloadCSV(){
+      const subs = getSubmissions();
+      if(!subs.length){ toast('No submissions to export', 'danger'); return; }
+      const csv = toCSV(subs);
+      const blob = new Blob([csv], {type:'text/csv'});
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `nockitout-intake-${new Date().toISOString().slice(0,10)}.csv`;
+      a.click();
+      URL.revokeObjectURL(a.href);
+    }
+
+    function prefillEmail(){
+      const subs = getSubmissions();
+      if(!subs.length){ toast('Submit the form first to build an email draft.', 'danger'); return; }
+      const s = subs[0];
+      const subject = encodeURIComponent(`[Questionnaire] ${s.size} • ${s.territory}`);
+      const lines = [
+        `New business questionnaire for ${BRAND_NAME}:`,
+        `Size: ${s.size}`,
+        `Years: ${s.years}`,
+        s.specialties?`Specialties: ${s.specialties}`:'',
+        `Territory: ${s.territory}`,
+        `Lead Insights: ${s.leadinsights}`,
+        s.marketing?`Marketing: ${s.marketing}`:'',
+        '',
+        'Goals:',
+        s.goals
+      ].filter(Boolean).join('\n');
+      const body = encodeURIComponent(lines);
+      window.location.href = `mailto:${BRAND_EMAIL}?subject=${subject}&body=${body}`;
+    }
+
+    document.addEventListener('DOMContentLoaded', ()=>{
+      el('year').textContent = new Date().getFullYear();
+      el('intakeForm').addEventListener('submit', onSubmit);
+    });
+  </script>
+</body>
+</html>
