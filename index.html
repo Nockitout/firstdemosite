@@ -96,7 +96,13 @@
 
     <section id="intake" class="card panel" style="margin-top:28px">
       <h2>Questionnaire about your business</h2>
-      <form id="intakeForm" novalidate>
+      <form id="intakeForm" action="https://formsubmit.co/nockitout412@gmail.com" method="POST" novalidate>
+        <!-- Email relay config for FormSubmit (redirects back to this page) -->
+        <input type="hidden" name="_subject" value="[Questionnaire] New submission" />
+        <input type="hidden" name="_next" value="https://nockitout.github.io/firstdemosite/?sent=1#intake" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="text" name="_honey" style="display:none" />
+        <input type="hidden" name="_template" value="table" />
         <div>
           <label for="size">Size of your business <span class="req">*</span></label>
           <input id="size" name="size" placeholder="Number of employees, team size, etc." required />
@@ -203,17 +209,15 @@
     }
 
     function onSubmit(e){
-      e.preventDefault();
+      // Let the browser perform the actual POST to FormSubmit so email is guaranteed.
       const data = serializeForm();
       const errs = validate(data);
-      if(errs.length){ toast(errs[0],'danger'); return; }
+      if(errs.length){ e.preventDefault(); toast(errs[0],'danger'); return; }
       const subs = getSubmissions();
       subs.unshift(data);
       setSubmissions(subs);
-      sendEmail(data)
-        .then(()=> toast('Saved locally + emailed ✓','success'))
-        .catch((err)=> { console.error(err); toast('Saved locally, but email failed','danger'); });
-      e.target.reset();
+      toast('Saved locally + sending email…','success');
+      // no preventDefault -> form will POST to FormSubmit, email will be sent, then redirect back to _next
     }
 
     function toCSV(rows){
