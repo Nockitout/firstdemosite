@@ -68,6 +68,12 @@
       .row{grid-template-columns:1fr}
       nav{display:none}
     }
+  
+    /* Admin reveal helpers */
+    .admin-inline{display:none !important}
+    .admin-block{display:none !important}
+    body.is-admin .admin-inline{display:inline-flex !important}
+    body.is-admin .admin-block{display:block !important}
   </style>
 </head>
 <body>
@@ -90,7 +96,7 @@
     <section class="hero">
       <div>
         <h1>Launch-ready starter site + <span style="background: linear-gradient(90deg,var(--brand),var(--brand-2));-webkit-background-clip:text;background-clip:text;color:transparent">client intake form</span></h1>
-        <p>Local-only demo. Submissions save to your browser, export to CSV, and now also <b>auto‑email</b> a summary to <a href="mailto:nockitout412@gmail.com">nockitout412@gmail.com</a>.</p>
+        <p>Submissions automatically email our team. Data also saves locally (private to this browser).</p>
       </div>
     </section>
 
@@ -140,8 +146,8 @@
 
         <div class="form-actions">
           <button class="btn icon" type="submit">Submit Intake</button>
-          <button class="btn secondary" type="button" onclick="downloadCSV()">Download CSV</button>
-          <button class="btn secondary" type="button" onclick="prefillEmail()">Open Email Draft (optional)</button>
+          <button class="btn secondary admin-inline" type="button" onclick="downloadCSV()">Download CSV</button>
+          <button class="btn secondary admin-inline" type="button" onclick="prefillEmail()">Open Email Draft</button>
           <span class="tag" id="formStatus" aria-live="polite"></span>
         </div>
       </form>
@@ -160,7 +166,7 @@
   <footer class="wrap">
     <div class="card panel" style="text-align:center">
       <div>© <span id="year"></span> Nockitout — Pittsburgh, PA • <a href="mailto:nockitout412@gmail.com">nockitout412@gmail.com</a></div>
-      <div class="help">This is a local demo. No data leaves your device.</div>
+      <div class="help">This is a demo. Submissions email our team; a local copy remains in this browser only.</div>
     </div>
   </footer>
 
@@ -168,7 +174,6 @@
     // Minimal JS to save locally + export CSV + email summary
     const BRAND_NAME = 'Nockitout';
     const BRAND_EMAIL = 'nockitout412@gmail.com';
-    const EMAIL_ENDPOINT = 'https://formsubmit.co/ajax/nockitout412@gmail.com';
 
     const el = (id)=>document.getElementById(id);
     const fmtDate = (d)=> new Date(d).toLocaleString();
@@ -263,26 +268,15 @@
     document.addEventListener('DOMContentLoaded', ()=>{
       el('year').textContent = new Date().getFullYear();
       el('intakeForm').addEventListener('submit', onSubmit);
-    });
-      async function sendEmail(s){
-      const payload = {
-        _subject: `[Questionnaire] ${s.size} • ${s.territory}`,
-        Size: s.size,
-        Years: s.years,
-        Specialties: s.specialties || '—',
-        Territory: s.territory,
-        'Lead Insights': s.leadinsights,
-        Marketing: s.marketing || '—',
-        Goals: s.goals
-      };
-      const res = await fetch(EMAIL_ENDPOINT,{
-        method:'POST',
-        headers:{'Content-Type':'application/json','Accept':'application/json'},
-        body: JSON.stringify(payload)
-      });
-      if(!res.ok) throw new Error('Email send failed');
-      return res.json();
-    }
+    });/* Admin mode: ?admin=1 to show CSV + tools; ?admin=0 to hide. Alt+D downloads CSV. Persists via localStorage. */
+    (function(){
+      const params = new URLSearchParams(location.search);
+      const setAdmin=(on)=>{ document.body.classList.toggle('is-admin', !!on); if(on){localStorage.setItem('nk_admin','1');} else {localStorage.removeItem('nk_admin');} };
+      if(params.get('admin')==='1'){ setAdmin(true); }
+      else if(params.get('admin')==='0'){ setAdmin(false); }
+      else if(localStorage.getItem('nk_admin')==='1'){ setAdmin(true); }
+      document.addEventListener('keydown', (e)=>{ if(e.altKey && (e.key||'').toLowerCase()==='d'){ try{ downloadCSV(); }catch(_){} }});
+    })();
   </script>
 </body>
 </html>
