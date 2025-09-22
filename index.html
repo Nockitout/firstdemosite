@@ -109,6 +109,31 @@
         <input type="hidden" name="_captcha" value="false" />
         <input type="text" name="_honey" style="display:none" />
         <input type="hidden" name="_template" value="table" />
+
+        <!-- NEW: Contact details -->
+        <div class="row">
+          <div>
+            <label for="name">Full name <span class="req">*</span></label>
+            <input id="name" name="Name" placeholder="Jane Smith" required />
+          </div>
+          <div>
+            <label for="business">Business name</label>
+            <input id="business" name="Business" placeholder="Acme Co" />
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label for="email">Email <span class="req">*</span></label>
+            <input id="email" name="Email" type="email" placeholder="jane@example.com" required />
+          </div>
+          <div>
+            <label for="phone">Phone</label>
+            <input id="phone" name="Phone" type="tel" placeholder="(555) 555-5555" />
+          </div>
+        </div>
+
+        <!-- Existing questions -->
         <div>
           <label for="size">Size of your business <span class="req">*</span></label>
           <input id="size" name="size" placeholder="Number of employees, team size, etc." required />
@@ -171,7 +196,7 @@
   </footer>
 
   <script>
-    // Minimal JS to save locally + export CSV + email summary
+    // Minimal JS to save locally + export CSV + (admin) email draft
     const BRAND_NAME = 'Nockitout';
     const BRAND_EMAIL = 'nockitout412@gmail.com';
 
@@ -190,21 +215,29 @@
     function setSubmissions(arr){ localStorage.setItem('nockitout_subs', JSON.stringify(arr)); }
 
     function serializeForm(){
-      const f = el('intakeForm');
       return {
         date: Date.now(),
-        size: f.size.value.trim(),
-        years: f.years.value.trim(),
-        specialties: f.specialties.value.trim(),
-        territory: f.territory.value.trim(),
-        leadinsights: f.leadinsights.value.trim(),
-        marketing: f.marketing.value.trim(),
-        goals: f.goals.value.trim(),
+        // NEW contact fields
+        name: (el('name').value || '').trim(),
+        business: (el('business').value || '').trim(),
+        email: (el('email').value || '').trim(),
+        phone: (el('phone').value || '').trim(),
+        // existing
+        size: (el('size').value || '').trim(),
+        years: (el('years').value || '').trim(),
+        specialties: (el('specialties').value || '').trim(),
+        territory: (el('territory').value || '').trim(),
+        leadinsights: (el('leadinsights').value || '').trim(),
+        marketing: (el('marketing').value || '').trim(),
+        goals: (el('goals').value || '').trim(),
       };
     }
 
     function validate(d){
       const e=[];
+      if(!d.name) e.push('Name is required');
+      if(!d.email) e.push('Email is required');
+      if(d.email && !/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(d.email)) e.push('Email is invalid');
       if(!d.size) e.push('Size is required');
       if(!d.years && d.years !== 0) e.push('Years is required');
       if(!d.territory) e.push('Territory is required');
@@ -228,8 +261,8 @@
     function toCSV(rows){
       const headers = Object.keys(rows[0]);
       const esc = (v)=>`"${String(v??'').replace(/"/g,'""')}"`;
-      const body = rows.map(r=>headers.map(h=>esc(r[h])).join(',')).join('\n');
-      return headers.join(',') + '\n' + body;
+      const body = rows.map(r=>headers.map(h=>esc(r[h])).join(',')).join('\\n');
+      return headers.join(',') + '\\n' + body;
     }
 
     function downloadCSV(){
@@ -248,9 +281,13 @@
       const subs = getSubmissions();
       if(!subs.length){ toast('Submit the form first to build an email draft.', 'danger'); return; }
       const s = subs[0];
-      const subject = encodeURIComponent(`[Questionnaire] ${s.size} • ${s.territory}`);
+      const subject = encodeURIComponent(`[Questionnaire] ${s.name}${s.business ? ' — ' + s.business : ''}`);
       const lines = [
         `New business questionnaire for ${BRAND_NAME}:`,
+        `Name: ${s.name}`,
+        s.business?`Business: ${s.business}`:'',
+        `Email: ${s.email}`,
+        s.phone?`Phone: ${s.phone}`:'',
         `Size: ${s.size}`,
         `Years: ${s.years}`,
         s.specialties?`Specialties: ${s.specialties}`:'',
@@ -260,7 +297,7 @@
         '',
         'Goals:',
         s.goals
-      ].filter(Boolean).join('\n');
+      ].filter(Boolean).join('\\n');
       const body = encodeURIComponent(lines);
       window.location.href = `mailto:${BRAND_EMAIL}?subject=${subject}&body=${body}`;
     }
@@ -268,7 +305,9 @@
     document.addEventListener('DOMContentLoaded', ()=>{
       el('year').textContent = new Date().getFullYear();
       el('intakeForm').addEventListener('submit', onSubmit);
-    });/* Admin mode: ?admin=1 to show CSV + tools; ?admin=0 to hide. Alt+D downloads CSV. Persists via localStorage. */
+    });
+
+    /* Admin mode: ?admin=1 to show CSV + tools; ?admin=0 to hide. Alt+D downloads CSV. Persists via localStorage. */
     (function(){
       const params = new URLSearchParams(location.search);
       const setAdmin=(on)=>{ document.body.classList.toggle('is-admin', !!on); if(on){localStorage.setItem('nk_admin','1');} else {localStorage.removeItem('nk_admin');} };
