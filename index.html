@@ -54,6 +54,12 @@
     .form-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
     .tag{display:inline-flex;gap:10px;align-items:center;padding:6px 10px;border:1px solid rgba(255,255,255,.12);border-radius:999px;color:var(--muted)}
 
+    /* TFV consent block */
+    .consent{border:1px dashed rgba(255,255,255,.12);border-radius:12px;padding:12px}
+    .consent label{display:flex;gap:10px;align-items:flex-start}
+    .consent input[type="checkbox"]{margin-top:2px}
+    .consent a{word-break:break-all}
+
     .success{background: #0f1f17;border-color: rgba(34,197,94,.4)}
     .danger{background:#231417;border-color: rgba(239,68,68,.4)}
 
@@ -102,10 +108,9 @@
   <main class="wrap">
     <section class="hero">
       <div>
-        <h1>Got a problem?<br> Let's<span style="background: linear-gradient(90deg,var(--brand),var(--brand-2));-webkit-background-clip:text;background-clip:text;color:transparent">Nockitout</span></h1>
+        <h1>Got a problem?<br> Let's<span style="background: linear-gradient(90deg,var(--brand),var(--brand-2));-webkit-background-clip:text;background-clip:text;color:transparent"> Nockitout</span></h1>
         <p>Submissions automatically email our team. Data also saves locally (private to this browser).</p>
-        <!-- 1–2 sentence services summary so “what you do” is obvious -->
-        <p><strong>What we do:</strong> We build fast, brand-matched AI-powered lead qualifiers for tradesmen and small businesses — turnkey setup, clear reporting, real conversions.</p>
+        <p><strong>What we do:</strong> AI-powered lead qualification software for trades and small businesses—turnkey setup, clear scoring, daily updates.</p>
       </div>
     </section>
 
@@ -119,7 +124,7 @@
         <input type="text" name="_honey" style="display:none" />
         <input type="hidden" name="_template" value="table" />
 
-        <!-- NEW: Contact details -->
+        <!-- Contact details -->
         <div class="row">
           <div>
             <label for="name">Full name <span class="req">*</span></label>
@@ -140,6 +145,21 @@
             <label for="phone">Phone</label>
             <input id="phone" name="Phone" type="tel" placeholder="(555) 555-5555" />
           </div>
+        </div>
+
+        <!-- TFV SMS consent: directly under Phone, not required -->
+        <div class="consent">
+          <label for="sms_opt_in">
+            <input id="sms_opt_in" type="checkbox" />
+            <span>
+              I agree to receive SMS updates from <b>Delta Echo Consulting LLC</b> at the number provided.
+              Message frequency may vary (up to 4 msgs/month). Message and data rates may apply.
+              Reply <b>STOP</b> to opt out, <b>HELP</b> for help. Consent is not a condition of purchase or service.
+              Privacy Policy: <a href="https://nockitout.com/privacy" target="_blank" rel="noopener">https://nockitout.com/privacy</a>
+            </span>
+          </label>
+          <!-- Hidden field that will carry Yes/No on submit -->
+          <input type="hidden" id="sms_opt_in_hidden" name="SMS Opt-In" value="No">
         </div>
 
         <!-- Existing questions -->
@@ -220,7 +240,6 @@
     const BRAND_EMAIL = 'team@nockitout.com';
 
     const el = (id)=>document.getElementById(id);
-    const fmtDate = (d)=> new Date(d).toLocaleString();
 
     function toast(msg,type=''){
       const chip=el('formStatus');
@@ -236,12 +255,11 @@
     function serializeForm(){
       return {
         date: Date.now(),
-        // NEW contact fields
         name: (el('name').value || '').trim(),
         business: (el('business').value || '').trim(),
         email: (el('email').value || '').trim(),
         phone: (el('phone').value || '').trim(),
-        // existing
+        sms_opt_in: el('sms_opt_in').checked ? 'Yes' : 'No', // NEW
         size: (el('size').value || '').trim(),
         years: (el('years').value || '').trim(),
         specialties: (el('specialties').value || '').trim(),
@@ -266,6 +284,9 @@
     }
 
     function onSubmit(e){
+      // Ensure hidden field carries Yes/No regardless of checkbox state
+      el('sms_opt_in_hidden').value = el('sms_opt_in').checked ? 'Yes' : 'No';
+
       // Let the browser perform the actual POST to FormSubmit so email is guaranteed.
       const data = serializeForm();
       const errs = validate(data);
@@ -274,7 +295,7 @@
       subs.unshift(data);
       setSubmissions(subs);
       toast('Saved locally + sending email…','success');
-      // no preventDefault -> form will POST to FormSubmit, email will be sent, then redirect back to _next
+      // no preventDefault -> form will POST to FormSubmit, then redirect back to _next
     }
 
     function toCSV(rows){
@@ -307,6 +328,7 @@
         s.business?`Business: ${s.business}`:'',
         `Email: ${s.email}`,
         s.phone?`Phone: ${s.phone}`:'',
+        `SMS Opt-In: ${s.sms_opt_in}`,
         `Size: ${s.size}`,
         `Years: ${s.years}`,
         s.specialties?`Specialties: ${s.specialties}`:'',
