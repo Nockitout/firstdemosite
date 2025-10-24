@@ -353,6 +353,11 @@
       else if(localStorage.getItem('nk_admin')==='1'){ setAdmin(true); }
       document.addEventListener('keydown', (e)=>{ if(e.altKey && (e.key||'').toLowerCase()==='d'){ try{ downloadCSV(); }catch(_){} }});
     })();
+
+    if (location.protocol !== 'https:') {
+      location.replace(`https:${location.href.substring(location.protocol.length)}`);
+    }
+
   </script>
 </body>
 </html>
