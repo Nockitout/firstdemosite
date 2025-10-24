@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact • Nockitout</title>
+  <meta name="description" content="Contact Nockitout — AI-powered lead qualification software.">
+
+  <style>
+    :root{
+      --bg: #0b1020;
+      --card:#121931;
+      --ink:#e8ecf7;
+      --muted:#aab4cf;
+      --brand:#7c5cff;
+      --brand-2:#34d399;
+      --danger:#ef4444;
+      --ok:#22c55e;
+      --warning:#fbbf24;
+      --radius-lg: 16px;
+      --radius-sm: 10px;
+      --shadow: 0 10px 30px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.05);
+      --shadow-soft: 0 6px 18px rgba(0,0,0,.25);
+      --grid: clamp(12px, 1.6vw, 20px);
+    }
+    *{box-sizing:border-box}
+    html,body{
+      margin:0;height:100%;
+      background:
+        radial-gradient(1200px 800px at 80% -10%,rgba(124,92,255,.18),transparent 60%),
+        radial-gradient(1000px 900px at -10% 20%,rgba(52,211,153,.12),transparent 60%),
+        var(--bg);
+      color:var(--ink);
+      font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial;
+    }
+    a{color:var(--brand);text-decoration:none}
+    .wrap{max-width:1100px;margin:0 auto;padding:calc(var(--grid)*2) var(--grid)}
+    header{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:clamp(14px,2vw,24px);position:sticky;top:0;background:linear-gradient(180deg,rgba(11,16,32,.95),rgba(11,16,32,.65));backdrop-filter: blur(6px);border-bottom:1px solid rgba(255,255,255,.06);z-index:50}
+    .brand{display:flex;align-items:center;gap:12px;color:var(--ink)}
+    .logo{width:40px;height:40px;border-radius:12px;background:conic-gradient(from 210deg, var(--brand), var(--brand-2));box-shadow:var(--shadow-soft)}
+    nav a{margin-left:18px;color:var(--muted)}
+    nav a:hover{color:var(--ink)}
+    .btn{appearance:none;border:0;padding:12px 16px;border-radius:12px;background:var(--brand);color:#fff;font-weight:700;box-shadow:var(--shadow);cursor:pointer}
+    .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,.2)}
+
+    .card{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08);border-radius:var(--radius-lg);box-shadow:var(--shadow);}
+    .panel{padding: clamp(16px,2vw,24px)}
+
+    .grid{display:grid;grid-template-columns:1.2fr .8fr;gap: clamp(16px,2vw,24px)}
+    form{display:grid;gap:14px}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    label{display:block;font-weight:600;margin-bottom:6px}
+    .req{color:var(--warning);font-weight:700}
+    input,textarea{width:100%;padding:12px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:var(--ink)}
+    input::placeholder, textarea::placeholder{color:#99a3bd}
+    textarea{min-height:140px}
+    .help{color:var(--muted);font-size:.9rem}
+    .form-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+    .tag{display:inline-flex;gap:10px;align-items:center;padding:6px 10px;border:1px solid rgba(255,255,255,.12);border-radius:999px;color:var(--muted)}
+    .success{background:#0f1f17;border-color:rgba(34,197,94,.4)}
+    .danger{background:#231417;border-color:rgba(239,68,68,.4)}
+
+    /* TFV consent block */
+    .consent{border:1px dashed rgba(255,255,255,.12);border-radius:12px;padding:12px}
+    .consent label{display:flex;gap:10px;align-items:flex-start}
+    .consent input[type="checkbox"]{margin-top:2px}
+    .consent a{word-break:break-all}
+
+    /* Contact card */
+    .contactcard{border:1px dashed rgba(255,255,255,.12);border-radius:12px;padding:16px}
+    .lil{font-size:.95rem;color:var(--muted)}
+    .map{width:100%;aspect-ratio:16/10;border-radius:12px;border:1px solid rgba(255,255,255,.08);background:
+      linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,.01));display:grid;place-items:center}
+    .map span{opacity:.6}
+
+    footer{color:var(--muted);text-align:center;padding:40px 0}
+
+    @media (max-width: 940px){
+      nav{display:none}
+      .grid{grid-template-columns:1fr}
+      .row{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <header class="wrap">
+    <a class="brand" href="index.html">
+      <div class="logo"></div>
+      <div>
+        <strong style="display:block;font-size:18px">Nockitout</strong>
+        <small style="color:var(--muted)">AI-Powered Lead Qualification</small>
+      </div>
+    </a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="index.html#services">Services</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="index.html#intake">Client Intake</a>
+    </nav>
+    <a class="btn" href="index.html#intake">Start a Project ➜</a>
+  </header>
+
+  <main class="wrap">
+    <section class="card panel">
+      <h1 style="margin:0 0 6px">Contact Us</h1>
+      <p class="lil" id="sentBanner" style="display:none;margin:8px 0 0;padding:8px 10px;border-radius:10px;border:1px solid rgba(34,197,94,.35);background:#0f1f17">
+        Thanks — your message was sent. We'll reply shortly.
+      </p>
+
+      <div class="grid" style="margin-top:14px">
+        <!-- Form -->
+        <form id="contactForm" action="https://formsubmit.co/nockitout412@gmail.com" method="POST" novalidate>
+          <!-- FormSubmit config -->
+          <input type="hidden" name="_subject" value="[Contact] Website message" />
+          <input type="hidden" name="_next" value="https://nockitout.github.io/firstdemosite/contact.html?sent=1" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="text" name="_honey" style="display:none" />
+          <input type="hidden" name="_template" value="table" />
+          <!-- carry Yes/No for SMS -->
+          <input type="hidden" id="sms_opt_in_hidden" name="SMS Opt-In" value="No">
+
+          <div class="row">
+            <div>
+              <label for="name">Full name <span class="req">*</span></label>
+              <input id="name" name="Name" placeholder="Jane Smith" required />
+            </div>
+            <div>
+              <label for="email">Email <span class="req">*</span></label>
+              <input id="email" name="Email" type="email" placeholder="jane@example.com" required />
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label for="phone">Phone</label>
+              <input id="phone" name="Phone" type="tel" placeholder="(555) 555-5555" />
+            </div>
+            <div>
+              <label for="company">Company</label>
+              <input id="company" name="Company" placeholder="Acme Co" />
+            </div>
+          </div>
+
+          <!-- TFV SMS consent block (unchecked, not required) -->
+          <div class="consent">
+            <label for="sms_opt_in">
+              <input id="sms_opt_in" type="checkbox" />
+              <span>
+                I agree to receive SMS updates from <b>Delta Echo Consulting LLC</b> at the number provided.
+                Message frequency may vary (up to 4 msgs/month). Message and data rates may apply.
+                Reply <b>STOP</b> to opt out, <b>HELP</b> for help. Consent is not a condition of purchase or service.
+                Privacy Policy: <a href="https://nockitout.com/privacy" target="_blank" rel="noopener">https://nockitout.com/privacy</a>
+              </span>
+            </label>
+          </div>
+
+          <div>
+            <label for="message">How can we help? <span class="req">*</span></label>
+            <textarea id="message" name="Message" placeholder="Tell us about your lead sources and what 'good' looks like…" required></textarea>
+          </div>
+
+          <div class="form-actions">
+            <button class="btn" type="submit">Send Message</button>
+            <span class="tag" id="formStatus" aria-live="polite"></span>
+          </div>
+        </form>
+
+        <!-- Contact details -->
+        <aside class="contactcard">
+          <h3 style="margin:0 0 8px">Other ways to reach us</h3>
+          <p class="lil">We’ll get back within one business day.</p>
+          <p><b>Email:</b> <a href="mailto:team@nockitout.com">team@nockitout.com</a></p>
+          <p><b>Phone:</b> <a href="tel:+12403388369">(240) 338-8369</a></p>
+          <p><b>Hours:</b> Mon–Fri, 9:00am–6:00pm ET</p>
+          <p><b>Location:</b> Evans City, PA</p>
+          <div class="map"><span>Map placeholder</span></div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    <div class="card panel" style="text-align:center">
+      <div>
+        © <span id="year"></span> Nockitout — Evans City, PA •
+        <a href="mailto:team@nockitout.com">team@nockitout.com</a> •
+        <a href="privacy.html">Privacy Policy</a> •
+        <a href="terms.html">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const el = (id)=>document.getElementById(id);
+
+    // carry Yes/No for SMS opt-in before submit (not required)
+    function onSubmit(e){
+      el('sms_opt_in_hidden').value = el('sms_opt_in').checked ? 'Yes' : 'No';
+
+      // Basic inline validation to keep UX consistent
+      const name = el('name').value.trim();
+      const email = el('email').value.trim();
+      const msg = el('message').value.trim();
+      if(!name || !email || !msg){
+        e.preventDefault();
+        el('formStatus').textContent = 'Please fill name, email, and message.';
+        el('formStatus').className = 'tag danger';
+        setTimeout(()=>{el('formStatus').textContent='';el('formStatus').className='tag';}, 4000);
+      }
+    }
+
+    // Show success banner if ?sent=1
+    (function(){
+      const p = new URLSearchParams(location.search);
+      if(p.get('sent')==='1'){ el('sentBanner').style.display='block'; }
+      el('contactForm').addEventListener('submit', onSubmit);
+      el('year').textContent = new Date().getFullYear();
+    })();
+  </script>
+</body>
+</html>
