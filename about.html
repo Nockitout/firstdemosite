@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About • Nockitout</title>
+  <meta name="description" content="Nockitout builds AI-powered lead qualification software that scores inbound leads and alerts teams to the best opportunities." />
+
+  <style>
+    :root{
+      --bg: #0b1020;
+      --card:#121931;
+      --ink:#e8ecf7;
+      --muted:#aab4cf;
+      --brand:#7c5cff;
+      --brand-2:#34d399;
+      --danger:#ef4444;
+      --ok:#22c55e;
+      --warning:#fbbf24;
+      --radius-lg: 16px;
+      --radius-sm: 10px;
+      --shadow: 0 10px 30px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.05);
+      --shadow-soft: 0 6px 18px rgba(0,0,0,.25);
+      --grid: clamp(12px, 1.6vw, 20px);
+    }
+    *{box-sizing:border-box}
+    html,body{
+      margin:0;height:100%;
+      background:
+        radial-gradient(1200px 800px at 80% -10%,rgba(124,92,255,.18),transparent 60%),
+        radial-gradient(1000px 900px at -10% 20%,rgba(52,211,153,.12),transparent 60%),
+        var(--bg);
+      color:var(--ink);
+      font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial;
+    }
+    a{color:var(--brand);text-decoration:none}
+    .wrap{max-width:1100px;margin:0 auto;padding:calc(var(--grid)*2) var(--grid)}
+    header{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:clamp(14px,2vw,24px);position:sticky;top:0;background:linear-gradient(180deg,rgba(11,16,32,.95),rgba(11,16,32,.65));backdrop-filter: blur(6px);border-bottom:1px solid rgba(255,255,255,.06);z-index:50}
+    .brand{display:flex;align-items:center;gap:12px;color:var(--ink)}
+    .logo{width:40px;height:40px;border-radius:12px;background:conic-gradient(from 210deg, var(--brand), var(--brand-2));box-shadow:var(--shadow-soft)}
+    nav a{margin-left:18px;color:var(--muted)}
+    nav a:hover{color:var(--ink)}
+    .btn{appearance:none;border:0;padding:12px 16px;border-radius:12px;background:var(--brand);color:#fff;font-weight:700;box-shadow:var(--shadow);cursor:pointer}
+
+    .hero{margin-top:24px}
+    .hero h1{font-size: clamp(28px, 4.2vw, 48px);line-height:1.05;margin:0 0 10px}
+    .hero p{color:var(--muted);margin:0 0 12px}
+
+    .card{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08);border-radius:var(--radius-lg);box-shadow:var(--shadow);}
+    .panel{padding: clamp(16px,2vw,24px)}
+
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap: clamp(16px,2vw,24px)}
+    .person{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start;border:1px dashed rgba(255,255,255,.1);border-radius:var(--radius-sm);padding:16px}
+    .person img{width:120px;height:120px;border-radius:14px;object-fit:cover;box-shadow:var(--shadow-soft);border:1px solid rgba(255,255,255,.08)}
+    .person h3{margin:0 0 4px}
+    .person .title{color:var(--muted);font-size:.95rem;margin-bottom:8px}
+    .bullet{display:flex;gap:8px;align-items:flex-start;color:var(--muted);font-size:.95rem}
+    .bullet:before{content:"•";color:var(--brand);font-weight:900;line-height:1.1}
+
+    .values{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .value{border:1px dashed rgba(255,255,255,.1);border-radius:var(--radius-sm);padding:16px}
+    .value b{display:block;margin-bottom:6px}
+
+    footer{color:var(--muted);text-align:center;padding:40px 0}
+
+    @media (max-width: 940px){
+      .grid-2{grid-template-columns:1fr}
+      .values{grid-template-columns:1fr}
+      nav{display:none}
+    }
+  </style>
+
+  <!-- Optional org schema -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Organization",
+    "name":"Nockitout",
+    "url":"https://nockitout.com",
+    "email":"team@nockitout.com",
+    "description":"AI-powered lead qualification software that scores inbound leads and alerts teams to high-quality opportunities.",
+    "address":{"@type":"PostalAddress","addressLocality":"Evans City","addressRegion":"PA","addressCountry":"US"}
+  }
+  </script>
+</head>
+<body>
+  <header class="wrap">
+    <a class="brand" href="index.html">
+      <div class="logo"></div>
+      <div>
+        <strong style="display:block;font-size:18px">Nockitout</strong>
+        <small style="color:var(--muted)">AI-Powered Lead Qualification</small>
+      </div>
+    </a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="index.html#services">Services</a>
+      <a href="about.html">About</a>
+      <a href="contact">Contact</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="index.html#intake">Client Intake</a>
+    </nav>
+    <a class="btn" href="index.html#intake">Start a Project ➜</a>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <h1>About Nockitout</h1>
+      <p><strong>What we do:</strong> Nockitout is software that ingests your inbound leads from forms, calls, ads, and email—scores them with AI, and alerts your team to the highest-quality opportunities with simple daily updates.</p>
+    </section>
+
+    <section class="card panel" style="margin-top:18px">
+      <h2>Our Mission</h2>
+      <p>Help teams respond faster and sell smarter by turning messy inbound activity into a clear, ranked list of who to call next.</p>
+      <div class="values" style="margin-top:14px">
+        <div class="value"><b>Signal over noise</b><span class="bullet">Filter spam and low-intent leads; surface the ones that convert.</span></div>
+        <div class="value"><b>Speed to lead</b><span class="bullet">Push timely notifications to inbox and SMS so the right rep acts first.</span></div>
+        <div class="value"><b>Own your stack</b><span class="bullet">Works with the tools you already use—Sheets, CRMs, email, and phone.</span></div>
+      </div>
+    </section>
+
+    <section class="card panel" style="margin-top:18px">
+      <h2>Team</h2>
+      <div class="grid-2">
+        <!-- Mike Deem -->
+        <article class="person">
+          <img src="https://placehold.co/240x240/png?text=Mike+Deem" alt="Headshot placeholder for Mike Deem">
+          <div>
+            <h3>Mike Deem</h3>
+            <div class="title">Co-Founder • Business & Partnerships</div>
+            <p>Mike leads the business side—customer success, partnerships, and ensuring the product maps tightly to revenue outcomes.</p>
+            <p class="bullet">Focus areas: onboarding, ROI tracking, and high-signal scoring criteria.</p>
+          </div>
+        </article>
+
+        <!-- Ethan Suquet -->
+        <article class="person">
+          <img src="https://placehold.co/240x240/png?text=Ethan+Suquet" alt="Headshot placeholder for Ethan Suquet">
+          <div>
+            <h3>Ethan Suquet</h3>
+            <div class="title">Co-Founder • Engineering & AI</div>
+            <p>Ethan leads the tech—data pipelines, model-assisted scoring, and integrations that route alerts to the right people fast.</p>
+            <p class="bullet">Focus areas: Apps Script/Twilio automations, scoring models, and reliability.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="card panel" style="margin-top:18px">
+      <h2>How it works</h2>
+      <ol style="margin:0;padding-left:18px">
+        <li><b>Connect sources.</b> Forms, call transcripts/voicemail, ad leads, email—point them to Nockitout.</li>
+        <li><b>Score & classify.</b> AI ranks intent, fit, urgency, and flags spam/duplicates automatically.</li>
+        <li><b>Notify & track.</b> Daily digest and instant pings highlight who to contact first with reasoning attached.</li>
+      </ol>
+      <div style="margin-top:14px">
+        <a class="btn" href="index.html#intake">Start a Project</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    <div class="card panel" style="text-align:center">
+      <div>
+        © <span id="year"></span> Nockitout — Evans City, PA •
+        <a href="mailto:team@nockitout.com">team@nockitout.com</a> •
+        <a href="privacy.html">Privacy Policy</a> •
+        <a href="terms.html">Terms</a>
+      </div>
+      <div class="help" style="margin-top:6px">
+        Phone: <a href="tel:+17245550130">(724) 555-0130</a> • Hours: Mon–Fri, 9:00am–6:00pm ET
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
