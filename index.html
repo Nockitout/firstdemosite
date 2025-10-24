@@ -36,7 +36,7 @@
 
     .hero{display:grid;grid-template-columns: 1.1fr .9fr;gap: clamp(18px,3vw,34px);align-items:center;margin-top:30px}
     .hero h1{font-size: clamp(28px, 4.2vw, 48px);line-height:1.05;margin:0 0 10px}
-    .hero p{color:var(--muted);margin:0 0 20px}
+    .hero p{color:var(--muted);margin:0 0 12px}
     .card{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08);border-radius:var(--radius-lg);box-shadow:var(--shadow);}
     .panel{padding: clamp(16px,2vw,24px)}
 
@@ -86,7 +86,14 @@
       </div>
     </a>
     <nav>
+      <!-- added core page links -->
+      <a href="#top">Home</a>
       <a href="#services">Services</a>
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+      <!-- existing -->
       <a href="#intake">Client Intake</a>
     </nav>
     <button class="btn icon" onclick="document.getElementById('intake').scrollIntoView({behavior:'smooth'})">Start a Project ➜</button>
@@ -97,6 +104,8 @@
       <div>
         <h1>Launch-ready starter site + <span style="background: linear-gradient(90deg,var(--brand),var(--brand-2));-webkit-background-clip:text;background-clip:text;color:transparent">client intake form</span></h1>
         <p>Submissions automatically email our team. Data also saves locally (private to this browser).</p>
+        <!-- 1–2 sentence services summary so “what you do” is obvious -->
+        <p><strong>What we do:</strong> We build fast, brand-matched websites and AI-powered lead-gen/CRM automations for small businesses — turnkey setup, clear reporting, real conversions.</p>
       </div>
     </section>
 
@@ -189,18 +198,21 @@
   </main>
 
   <footer class="wrap">
-  <div class="card panel" style="text-align:center">
-    <div>
-      © <span id="year"></span> Nockitout — Pittsburgh, PA •
-      <a href="mailto:team@nockitout.com">team@nockitout.com</a> •
-      <a href="privacy.html">Privacy Policy</a>
+    <div class="card panel" style="text-align:center">
+      <div>
+        © <span id="year"></span> Nockitout — Pittsburgh, PA •
+        <a href="mailto:team@nockitout.com">team@nockitout.com</a> •
+        <a href="/privacy">Privacy Policy</a> •
+        <a href="/terms">Terms</a>
+      </div>
+      <div class="help" style="margin-top:6px">
+        Phone: <a href="tel:+17245550130">(724) 555-0130</a> • Hours: Mon–Fri, 9:00am–6:00pm ET
+      </div>
+      <div class="help">
+        This is a demo. Submissions email our team; a local copy remains in this browser only.
+      </div>
     </div>
-    <div class="help">
-      This is a demo. Submissions email our team; a local copy remains in this browser only.
-    </div>
-  </div>
-</footer>
-
+  </footer>
 
   <script>
     // Minimal JS to save locally + export CSV + (admin) email draft
@@ -244,7 +256,7 @@
       const e=[];
       if(!d.name) e.push('Name is required');
       if(!d.email) e.push('Email is required');
-      if(d.email && !/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(d.email)) e.push('Email is invalid');
+      if(d.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.email)) e.push('Email is invalid');
       if(!d.size) e.push('Size is required');
       if(!d.years && d.years !== 0) e.push('Years is required');
       if(!d.territory) e.push('Territory is required');
@@ -268,8 +280,8 @@
     function toCSV(rows){
       const headers = Object.keys(rows[0]);
       const esc = (v)=>`"${String(v??'').replace(/"/g,'""')}"`;
-      const body = rows.map(r=>headers.map(h=>esc(r[h])).join(',')).join('\\n');
-      return headers.join(',') + '\\n' + body;
+      const body = rows.map(r=>headers.map(h=>esc(r[h])).join(',')).join('\n');
+      return headers.join(',') + '\n' + body;
     }
 
     function downloadCSV(){
@@ -304,14 +316,14 @@
         '',
         'Goals:',
         s.goals
-      ].filter(Boolean).join('\\n');
+      ].filter(Boolean).join('\n');
       const body = encodeURIComponent(lines);
       window.location.href = `mailto:${BRAND_EMAIL}?subject=${subject}&body=${body}`;
     }
 
     document.addEventListener('DOMContentLoaded', ()=>{
-      el('year').textContent = new Date().getFullYear();
-      el('intakeForm').addEventListener('submit', onSubmit);
+      document.getElementById('year').textContent = new Date().getFullYear();
+      document.getElementById('intakeForm').addEventListener('submit', onSubmit);
     });
 
     /* Admin mode: ?admin=1 to show CSV + tools; ?admin=0 to hide. Alt+D downloads CSV. Persists via localStorage. */
