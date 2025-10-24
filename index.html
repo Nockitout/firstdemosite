@@ -146,23 +146,7 @@
             <input id="phone" name="Phone" type="tel" placeholder="(555) 555-5555" />
           </div>
         </div>
-
-        <!-- TFV SMS consent: directly under Phone, not required -->
-        <div class="consent">
-          <label for="sms_opt_in">
-            <input id="sms_opt_in" type="checkbox" />
-            <span>
-              I agree to receive SMS updates from <b>Delta Echo Consulting LLC</b> at the number provided.
-              Message frequency may vary (up to 4 msgs/month). Message and data rates may apply.
-              Reply <b>STOP</b> to opt out, <b>HELP</b> for help. Consent is not a condition of purchase or service.
-              Privacy Policy: <a href="https://nockitout.com/privacy" target="_blank" rel="noopener">https://nockitout.com/privacy</a>
-            </span>
-          </label>
-          <!-- Hidden field that will carry Yes/No on submit -->
-          <input type="hidden" id="sms_opt_in_hidden" name="SMS Opt-In" value="No">
-        </div>
-
-        <!-- Existing questions -->
+        
         <div>
           <label for="size">Size of your business <span class="req">*</span></label>
           <input id="size" name="size" placeholder="Number of employees, team size, etc." required />
@@ -196,6 +180,21 @@
         <div>
           <label for="goals">Goals <span class="req">*</span></label>
           <textarea id="goals" name="goals" placeholder="What goals do you have for the future of your business?" required></textarea>
+        </div>
+
+                <!-- TFV SMS consent: not required -->
+        <div class="consent">
+          <label for="sms_opt_in">
+            <input id="sms_opt_in" type="checkbox" />
+            <span>
+              I agree to receive SMS updates from <b>Delta Echo Consulting LLC</b> at the number provided.
+              Message frequency may vary (up to 4 msgs/month). Message and data rates may apply.
+              Reply <b>STOP</b> to opt out, <b>HELP</b> for help. Consent is not a condition of purchase or service.
+              Privacy Policy: <a href="https://nockitout.com/privacy" target="_blank" rel="noopener">https://nockitout.com/privacy</a>
+            </span>
+          </label>
+          <!-- Hidden field that will carry Yes/No on submit -->
+          <input type="hidden" id="sms_opt_in_hidden" name="SMS Opt-In" value="No">
         </div>
 
         <div class="form-actions">
