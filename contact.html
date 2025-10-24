@@ -144,7 +144,12 @@
             </div>
           </div>
 
-          <!-- TFV SMS consent block (unchecked, not required) -->
+          <div>
+            <label for="message">How can we help? <span class="req">*</span></label>
+            <textarea id="message" name="Message" placeholder="We'll reach back out to you within 1-2 business days" required></textarea>
+          </div>
+
+                    <!-- TFV SMS consent block (unchecked, not required) -->
           <div class="consent">
             <label for="sms_opt_in">
               <input id="sms_opt_in" type="checkbox" />
@@ -155,11 +160,6 @@
                 Privacy Policy: <a href="https://nockitout.com/privacy" target="_blank" rel="noopener">https://nockitout.com/privacy</a>
               </span>
             </label>
-          </div>
-
-          <div>
-            <label for="message">How can we help? <span class="req">*</span></label>
-            <textarea id="message" name="Message" placeholder="Tell us about your lead sources and what 'good' looks like…" required></textarea>
           </div>
 
           <div class="form-actions">
@@ -175,8 +175,13 @@
           <p><b>Email:</b> <a href="mailto:team@nockitout.com">team@nockitout.com</a></p>
           <p><b>Phone:</b> <a href="tel:+12403388369">(240) 338-8369</a></p>
           <p><b>Hours:</b> Mon–Fri, 9:00am–6:00pm ET</p>
-          <p><b>Location:</b> Evans City, PA</p>
-          <div class="map"><span>Map placeholder</span></div>
+          <p><b>Location:</b> Pittsburgh, PA</p>
+          <iframe class="map"
+            src="https://www.google.com/maps?q=Pittsburgh,+PA&output=embed"
+            loading="lazy"
+            allowfullscreen
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
         </aside>
       </div>
     </section>
